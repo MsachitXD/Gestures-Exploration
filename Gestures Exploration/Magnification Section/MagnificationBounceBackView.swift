@@ -8,8 +8,36 @@
 import SwiftUI
 
 struct MagnificationBounceBackView: View {
+    @State private var ScaleFactor: CGFloat = 1.0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Spacer()
+                NiceTextView(
+                    text: "Hello World!",
+                    bgColor: .black,
+                    fgColor: .orange,
+                    radius: 10)
+                .scaleEffect(ScaleFactor)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged{ value in
+                            withAnimation(.spring()){
+                                ScaleFactor = value
+                            }
+                        }
+                        .onEnded{ value in
+                            withAnimation(.spring()){
+                                ScaleFactor = 1.0
+                            }
+                        }
+                )
+                
+                Spacer()
+            }
+            .navigationTitle("Magnify and Bounce Back")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

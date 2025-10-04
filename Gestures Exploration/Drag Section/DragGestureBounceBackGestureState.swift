@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct DragGestureBounceBackGestureState: View {
+    @GestureState private var offset: CGSize = .zero
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                
+                Squares()
+                
+                Spacer()
+                NiceTextView(
+                    text: "Hello World",
+                    bgColor: .black.opacity(0.7),
+                    fgColor: .orange.opacity(0.85),
+                    radius: 10)
+                .offset(offset)
+                .animation(.spring(), value: offset)
+                .gesture(
+                    DragGesture()
+                        .updating($offset, body: { value, State, transaction in
+                            State = value.translation
+                        })
+                )
+                Spacer()
+            }
+            .navigationTitle("Drag and Bounce Back with Gesture State")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct GeneralGesturesSectionView: View {
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section(content:{
+            NavigationLink(#"General Gesture"# , destination: {
+                GesturesDemo()
+            })
+        }, header: {
+            Text("General Gesture Demo")
+        })
     }
 }
+
 
 #Preview {
     GeneralGesturesSectionView()

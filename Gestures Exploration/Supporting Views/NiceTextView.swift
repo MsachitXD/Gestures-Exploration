@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct NiceTextView: View {
+    
+    let text: String
+    let bgColor: Color
+    let fgColor: Color
+    let radius: CGFloat
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(text)
+            .font(.title)
+            .fontWeight(.semibold)
+            .foregroundColor(fgColor)
+            .padding()
+            .background(bgColor)
+//            .cornerRadius(radius)
+            .clipShape(.rect(cornerRadius: radius))
     }
 }
 
 #Preview {
-    NiceTextView()
+    NiceTextView(text: "Hello World", bgColor: .black, fgColor: .orange, radius: 10)
 }

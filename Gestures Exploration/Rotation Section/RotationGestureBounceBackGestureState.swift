@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct RotationGestureBounceBackGestureState: View {
+    
+    @GestureState private var rotation: Double = 0.0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            NiceTextView(
+                text: "Hello World!",
+                bgColor: .black,
+                fgColor: .orange,
+                radius: 10)
+            .rotationEffect(Angle(degrees: rotation))
+            .animation(.spring(), value: rotation)
+            .gesture(
+                RotationGesture()
+                    .updating($rotation, body: { value, State, transaction in
+                        State = value.degrees
+                    })
+            )
+            .navigationTitle("Rotation and Bounce Back with Gesture State")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        
     }
 }
 

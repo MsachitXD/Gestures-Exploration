@@ -8,11 +8,34 @@
 import SwiftUI
 
 struct MagnificationStoreStateView: View {
+    @Binding var ScaleFactor: CGFloat
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Spacer()
+                NiceTextView(
+                    text: "Hello World!",
+                    bgColor: .black,
+                    fgColor: .orange,
+                    radius: 10)
+                .scaleEffect(ScaleFactor)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged{ value in
+                            withAnimation(.spring()){
+                                ScaleFactor = value
+                            }
+                        }
+                )
+                Spacer()
+            }
+            .navigationTitle("Magnify and Store State")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 
+
 #Preview {
-    MagnificationStoreStateView()
+    MagnificationStoreStateView(ScaleFactor: .constant(1.0))
 }

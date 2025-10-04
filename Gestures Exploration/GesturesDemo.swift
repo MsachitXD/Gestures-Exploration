@@ -9,13 +9,15 @@ import SwiftUI
 
 struct GesturesDemo: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            Form{
+                MagnificationSectionView()
+                DragSectionView()
+                RotationSectionView()
+                GeneralGesturesSectionView()
+            }
+            .navigationTitle("Gestures")
         }
-        .padding()
     }
 }
 
